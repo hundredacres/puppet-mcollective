@@ -74,7 +74,7 @@ class mcollective::params {
 
   $package_dependencies = $::operatingsystem ? {
     /(?i:Debian|Ubuntu|Mint)/ => 'ruby-stomp',
-    default                   => undef,
+    default                   => 'rubygem-stomp',
   }
 
   $service = $::operatingsystem ? {
