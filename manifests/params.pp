@@ -47,7 +47,8 @@ class mcollective::params {
     default => undef,
   }
 
-  $config_file_client = $::operatingsystem ? {
+  $config_file_client = $::puppetversion ? {
+    /^4/    => '/etc/puppetlabs/mcollective/client.cfg',
     default => '/etc/mcollective/client.cfg',
   }
 
@@ -104,7 +105,8 @@ class mcollective::params {
     default => '/etc/mcollective',
   }
 
-  $config_file = $::operatingsystem ? {
+  $config_file = $::puppetversion ? {
+    /^4/    => '/etc/puppetlabs/mcollective/server.cfg',
     default => '/etc/mcollective/server.cfg',
   }
 
