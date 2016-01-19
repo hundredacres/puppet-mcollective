@@ -101,7 +101,8 @@ class mcollective::params {
     default => 'root',
   }
 
-  $config_dir = $::operatingsystem ? {
+  $config_dir = $::puppetversion ? {
+    /^4/    => '/etc/puppetlabs/mcollective',
     default => '/etc/mcollective',
   }
 
