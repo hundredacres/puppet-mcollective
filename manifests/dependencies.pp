@@ -17,11 +17,15 @@
 class mcollective::dependencies {
 
   include mcollective
+  $gem_provider = $::puppetversion ? {
+    /^4/    => 'puppet_gem',
+    default => 'gem',
+  }
 
   if !defined(Package[json]) {
     package { 'json':
       ensure   => $mcollective::manage_package,
-      provider => gem,
+      provider => $gem_provider,
       notify   => $mcollective::manage_service_autorestart
     }
   }
@@ -29,7 +33,7 @@ class mcollective::dependencies {
     if versioncmp($::rubyversion, '1.9.0') > 0 {
       package { 'net-ping':
         ensure   => $mcollective::manage_package,
-        provider => gem,
+        provider => $gem_provider,
         notify   => $mcollective::manage_service_autorestart
       }
     }
@@ -37,7 +41,7 @@ class mcollective::dependencies {
   if !defined(Package[sys-proctable]) {
     package { 'sys-proctable':
       ensure   => $mcollective::manage_package,
-      provider => gem,
+      provider => $gem_provider,
       notify   => $mcollective::manage_service_autorestart
     }
   }
