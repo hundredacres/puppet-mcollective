@@ -26,7 +26,7 @@ class mcollective::dependencies {
     package { 'json':
       ensure   => $mcollective::manage_package,
       provider => $gem_provider,
-      notify   => $mcollective::manage_service_autorestart
+      notify   => $mcollective::manage_service_autorestart,
     }
   }
   if !defined(Package[net-ping]) {
@@ -34,7 +34,7 @@ class mcollective::dependencies {
       package { 'net-ping':
         ensure   => $mcollective::manage_package,
         provider => $gem_provider,
-        notify   => $mcollective::manage_service_autorestart
+        notify   => $mcollective::manage_service_autorestart,
       }
     }
   }
@@ -42,15 +42,15 @@ class mcollective::dependencies {
     package { 'sys-proctable':
       ensure   => $mcollective::manage_package,
       provider => $gem_provider,
-      notify   => $mcollective::manage_service_autorestart
+      notify   => $mcollective::manage_service_autorestart,
     }
   }
 
   case $::operatingsystem {
-    redhat,centos,scientific,oraclelinux : {
+    'redhat','centos','amazon','scientific','oraclelinux' : {
       require yum::repo::puppetlabs
     }
-    ubuntu,debian : {
+    'ubuntu','debian' : {
       require apt::repo::puppetlabs
     }
     default: { }
