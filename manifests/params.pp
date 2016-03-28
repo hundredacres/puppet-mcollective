@@ -144,8 +144,13 @@ class mcollective::params {
   }
 
   $log_file = $::puppetversion ? {
-    '4'     => '/var/log/puppetlabs/mcollective.log',
+    /^4/    => '/var/log/puppetlabs/mcollective.log',
     default => '/var/log/mcollective.log',
+  }
+
+  $plugin_yaml = $::puppetversion ? {
+    /^4/    => '/etc/mcollective/facts.yaml:/etc/puppetlabs/mcollective/facts.yaml',
+    default => '/etc/mcollective/facts.yaml',
   }
 
   $port = '61613'

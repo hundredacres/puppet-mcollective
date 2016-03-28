@@ -286,6 +286,9 @@
 # [*log_file*]
 #   Log file(s). Used by puppi
 #
+# [*plugin_yaml*]
+#   Where facts are stored. Used by puppi
+#
 # [*port*]
 #   The listening port, if any, of the service.
 #   This is used by monitor, firewall and puppi (optional) components
@@ -377,6 +380,7 @@ class mcollective (
   $data_dir               = params_lookup( 'data_dir' ),
   $log_dir                = params_lookup( 'log_dir' ),
   $log_file               = params_lookup( 'log_file' ),
+  $plugin_yaml            = params_lookup( 'plugin_yaml' ),
   $port                   = params_lookup( 'port' ),
   $protocol               = params_lookup( 'protocol' )
   ) inherits mcollective::params {

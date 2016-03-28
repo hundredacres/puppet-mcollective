@@ -28,4 +28,4 @@ registerinterval = <%= scope.lookupvar('mcollective::register_interval') %>
 
 # Facts
 factsource = yaml
-plugin.yaml = /etc/mcollective/facts.yaml
+plugin.yaml = <%= scope.lookupvar('mcollective::plugin_yaml') %>
