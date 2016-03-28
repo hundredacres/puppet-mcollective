@@ -136,14 +136,15 @@ class mcollective::params {
   # Here plugins are stored
   $data_dir = $::operatingsystem ? {
     /(?i:Debian|Ubuntu|Mint)/ => '/usr/share/mcollective/plugins',
-    default                   => '/usr/libexec/mcollective',
+    default                   => '/usr/libexec/mcollective:/opt/puppetlabs/mcollective/plugins',
   }
 
   $log_dir = $::operatingsystem ? {
     default => '/var/log/mcollective',
   }
 
-  $log_file = $::operatingsystem ? {
+  $log_file = $::puppetversion ? {
+    '4'     => '/var/log/puppetlabs/mcollective.log',
     default => '/var/log/mcollective.log',
   }
 
