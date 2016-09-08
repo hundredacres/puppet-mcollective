@@ -16,7 +16,7 @@
 #
 class mcollective::dependencies {
 
-  include mcollective
+  include ::mcollective
   $gem_provider = $::puppetversion ? {
     /^4/    => 'puppet_gem',
     default => 'gem',
@@ -48,10 +48,17 @@ class mcollective::dependencies {
 
   case $::operatingsystem {
     'redhat','centos','amazon','scientific','oraclelinux' : {
-      require yum::repo::puppetlabs
+      case $::puppetversion {
+        /^4.*/ : {
+          require ::yum::repo::puppetlabs_collections
+        }
+        default: {
+          require ::yum::repo::puppetlabs
+        }
+      }
     }
     'ubuntu','debian' : {
-      require apt::repo::puppetlabs
+      require ::apt::repo::puppetlabs
     }
     default: { }
   }
