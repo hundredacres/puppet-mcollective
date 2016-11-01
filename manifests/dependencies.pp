@@ -58,7 +58,7 @@ class mcollective::dependencies {
       }
     }
     'ubuntu','debian' : {
-      require ::apt::repo::puppetlabs
+      #require ::apt::repo::puppetlabs
     }
     default: { }
   }
